@@ -42,11 +42,36 @@ module.exports = function (ctx) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
 
-      components: [],
-      directives: [],
+      components: [
+        'QHeader',
+        'QFooter',
+        'QTabs',
+        'QTab',
+        'QRouteTab',
+        'QList',
+        'QItem',
+        'QItemSection',
+        'QItemLabel',
+        'QCheckbox',
+        'QIcon',
+        'QDialog',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
+        'QInput',
+        'QDate',
+        'QTime',
+        'QPopupProxy'
+      ],
+      directives: [
+        'ClosePopup',
+        'Ripple'
+      ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Dialog'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -159,7 +184,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar-vue'
+        appId: 'awesome-todo'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

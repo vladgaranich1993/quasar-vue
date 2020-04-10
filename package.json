@@ -1,5 +1,5 @@
 {
-  "name": "quasar-vue",
+  "name": "awesome-todo",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
   "productName": "Quasar App",
@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "quasar": "^1.0.0"
+    "node-sass": "^4.13.1",
+    "quasar": "^1.0.0",
+    "sass-loader": "^8.0.2"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0"
