@@ -8,7 +8,14 @@
         <form @submit.prevent="submitForm">
             <q-card-section class="q-pt-none">
                 <div class="row q-mb-sm">
-                    <q-input class="col" outlined v-model="taskToSubmit.name" label="Task name" :rules="[val => !!val || 'Field is required']"/>
+                    <q-input 
+                        class="col" 
+                        outlined 
+                        v-model="taskToSubmit.name" 
+                        label="Task name" 
+                        :rules="[val => !!val || 'Field is required']"
+                        ref="name"
+                    />
                 </div>
                 <div class="row q-mb-sm">    
                     <q-input label="Due Date" outlined v-model="taskToSubmit.dueDate">
@@ -35,13 +42,15 @@
             </q-card-section>
 
             <q-card-actions align="right">
-                <q-btn type="submit" flat label="Save" color="primary" v-close-popup />
+                <q-btn type="submit" label="Save" color="primary" />
             </q-card-actions>
         </form>
     </q-card>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     data() {
         return {
@@ -54,8 +63,15 @@ export default {
         }
     },
     methods: {
+        ...mapActions('tasks', ['addTask']),
         submitForm() {
-            console.log('Submit')
+            this.$refs.name.validate();
+            if(!this.$refs.name.hasError) {
+                this.submitTask()
+            } 
+        },
+        submitTask() {
+            this.addTask(this.taskToSubmit)
         }
     }
 }
