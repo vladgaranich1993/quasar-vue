@@ -72,6 +72,7 @@ export default {
         },
         submitTask() {
             this.addTask(this.taskToSubmit)
+            this.$emit('close')
         }
     }
 }
