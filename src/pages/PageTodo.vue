@@ -1,7 +1,16 @@
 <template>
   <q-page padding>
-    <q-list bordered separator>
-      <Task v-for="(task, key) in tasks" :key="key" :task="task" :id="key"/>
+    <q-list 
+      bordered 
+      separator
+      v-if="Object.keys(tasks).length"
+    >
+      <Task 
+        v-for="(task, key) in tasks" 
+        :key="key" 
+        :task="task" 
+        :id="key"
+      />
     </q-list>
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -27,7 +36,7 @@ import AddTask from 'components/Tasks/Modals/AddTask'
 export default {
   data() {
     return {
-      showAddTask: true
+      showAddTask: false
     }
   },
   components: {

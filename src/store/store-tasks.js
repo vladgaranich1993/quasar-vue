@@ -4,24 +4,24 @@ import { uid } from 'quasar'
 const state = {
 
     tasks: {
-        'ID1': {
-            name: 'do exercises', 
-            completed: false, 
-            dueDate: '01/02/2020',
-            dueTime: '18:30'
-        },
-        'ID2': {
-            name: 'do homework', 
-            completed: false, 
-            dueDate: '20/12/2020',
-            dueTime: '11:30'
-        },
-        'ID3': {
-            name: 'do smth else', 
-            completed: false, 
-            dueDate: '01/05/2020',
-            dueTime: '15:30' 
-        },
+        // 'ID1': {
+        //     name: 'do exercises', 
+        //     completed: false, 
+        //     dueDate: '01/02/2020',
+        //     dueTime: '18:30'
+        // },
+        // 'ID2': {
+        //     name: 'do homework', 
+        //     completed: false, 
+        //     dueDate: '20/12/2020',
+        //     dueTime: '11:30'
+        // },
+        // 'ID3': {
+        //     name: 'do smth else', 
+        //     completed: false, 
+        //     dueDate: '01/05/2020',
+        //     dueTime: '15:30' 
+        // },
     }
 }
 

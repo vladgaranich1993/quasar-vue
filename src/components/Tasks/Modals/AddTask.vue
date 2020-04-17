@@ -10,32 +10,74 @@
                 <div class="row q-mb-sm">
                     <q-input 
                         class="col" 
-                        outlined 
+                        outlined
+                        autofocus 
                         v-model="taskToSubmit.name" 
                         label="Task name" 
                         :rules="[val => !!val || 'Field is required']"
                         ref="name"
-                    />
-                </div>
-                <div class="row q-mb-sm">    
-                    <q-input label="Due Date" outlined v-model="taskToSubmit.dueDate">
-                        <template v-slot:append>
-                            <q-icon name="event" class="cursor-pointer">
-                                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                                    <q-date v-model="taskToSubmit.dueDate" @input="() => $refs.qDateProxy.hide()" />
-                                </q-popup-proxy>
-                            </q-icon>
+                    >
+                        <template v-if="taskToSubmit.name" v-slot:append>
+                            <q-icon 
+                                name="close" 
+                                @click="taskToSubmit.name = ''" 
+                                class="cursor-pointer" 
+                            />
                         </template>
                     </q-input>
                 </div>
                 <div class="row q-mb-sm">    
-                    <q-input label="Due Time" outlined v-model="taskToSubmit.dueTime">
-                        <template v-slot:append>
-                            <q-icon name="access_time" class="cursor-pointer">
-                                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                                <q-time v-model="taskToSubmit.dueTime" />
+                    <q-input 
+                        label="Due Date" 
+                        outlined 
+                        v-model="taskToSubmit.dueDate"
+                    >
+                        <template 
+                            v-slot:append
+                        >
+                            <q-icon 
+                                v-if="taskToSubmit.dueDate"
+                                @click="clearDueDate" 
+                                class="cursor-pointer" 
+                                name="close"
+                            />
+                            <q-icon 
+                                name="event" 
+                                class="cursor-pointer"
+                            >
+                                <q-popup-proxy 
+                                    ref="qDateProxy" 
+                                    transition-show="scale" 
+                                    transition-hide="scale"
+                                >
+                                    <q-date 
+                                    v-model="taskToSubmit.dueDate" 
+                                    @input="() => $refs.qDateProxy.hide()" 
+                                />
                                 </q-popup-proxy>
                             </q-icon>
+                            
+                        </template>
+                    </q-input>
+                </div>
+                <div 
+                    class="row q-mb-sm" 
+                    v-if="taskToSubmit.dueDate"
+                >    
+                    <q-input class="col" label="Due Time" outlined v-model="taskToSubmit.dueTime">
+                        <template v-slot:append>
+                            <q-icon 
+                                v-if="taskToSubmit.dueTime"
+                                @click="clearDueDate" 
+                                class="cursor-pointer" 
+                                name="close"
+                            />
+                            <q-icon name="access_time" class="cursor-pointer">
+                                <q-popup-proxy transition-show="scale" transition-hide="scale">
+                                    <q-time v-model="taskToSubmit.dueTime" />
+                                </q-popup-proxy>
+                            </q-icon>
+                            
                         </template>
                     </q-input>
                 </div>
@@ -73,6 +115,10 @@ export default {
         submitTask() {
             this.addTask(this.taskToSubmit)
             this.$emit('close')
+        },
+        clearDueDate() {
+            this.taskToSubmit.dueDate = '';
+            this.taskToSubmit.dueTime = '';
         }
     }
 }
