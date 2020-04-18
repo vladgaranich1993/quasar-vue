@@ -1,62 +1,41 @@
 <template>
     <q-card>
-        <q-card-section class="flex justify-between">
-          <div class="text-h6">Add Task</div>
-          <q-btn v-close-popup flat dense round color="primary" icon="close" />
-        </q-card-section>
-
+        <ModalHeader>
+            Add Task
+        </ModalHeader>
         <form @submit.prevent="submitForm">
             <q-card-section class="q-pt-none">
-                <div class="row q-mb-sm">
-                    <q-input 
-                        class="col" 
-                        outlined
-                        autofocus 
-                        v-model="taskToSubmit.name" 
-                        label="Task name" 
-                        :rules="[val => !!val || 'Field is required']"
-                        ref="name"
-                    >
-                        <template v-if="taskToSubmit.name" v-slot:append>
-                            <q-icon 
-                                name="close" 
-                                @click="taskToSubmit.name = ''" 
-                                class="cursor-pointer" 
-                            />
-                        </template>
-                    </q-input>
-                </div>
+                <ModalTaskName :name.sync="taskToSubmit.name"/>
                 <div class="row q-mb-sm">    
                     <q-input 
                         label="Due Date" 
                         outlined 
                         v-model="taskToSubmit.dueDate"
-                    >
+                        >
                         <template 
                             v-slot:append
-                        >
+                            >
                             <q-icon 
                                 v-if="taskToSubmit.dueDate"
                                 @click="clearDueDate" 
                                 class="cursor-pointer" 
                                 name="close"
-                            />
+                                />
                             <q-icon 
                                 name="event" 
                                 class="cursor-pointer"
-                            >
+                                >
                                 <q-popup-proxy 
                                     ref="qDateProxy" 
                                     transition-show="scale" 
                                     transition-hide="scale"
-                                >
+                                    >
                                     <q-date 
                                     v-model="taskToSubmit.dueDate" 
                                     @input="() => $refs.qDateProxy.hide()" 
-                                />
+                                    />
                                 </q-popup-proxy>
                             </q-icon>
-                            
                         </template>
                     </q-input>
                 </div>
@@ -92,6 +71,8 @@
 
 <script>
 import { mapActions } from 'vuex'
+import ModalHeader from './Shared/ModalHeader'
+import ModalTaskName from './Shared/ModalTaskName'
 
 export default {
     data() {
@@ -103,6 +84,10 @@ export default {
                 completed: false
             }
         }
+    },
+    components: {
+        ModalHeader,
+        ModalTaskName
     },
     methods: {
         ...mapActions('tasks', ['addTask']),
